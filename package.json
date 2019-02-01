@@ -1,0 +1,18 @@
+{
+  "name": "docker-hook",
+  "version": "1.0.0",
+  "description": "Webhook for docker hub",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

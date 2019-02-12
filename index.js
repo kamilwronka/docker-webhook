@@ -19,8 +19,8 @@ app.post("/docker-hook-frontend", (req, res) => {
   });
 });
 
-app.post("/docker-hook-backend", (req, res) => {
-  exec("sh docker-backend.sh", (error, stdout, stderr) => {
+app.post("/game-core-backend", (req, res) => {
+  exec("sh game-core-backend.sh", (error, stdout, stderr) => {
     console.log(`${stdout}`);
     console.log(`${stderr}`);
     if (error !== null) {

@@ -14,11 +14,12 @@ app.get("/", function(req, res) {
 app.post("/api/hook/docker", (req, res) => {
   const repo_name = req.body.repository.repo_name;
   const image_tag = req.body.push_data.tag;
+  const image_name = req.body.repository.name;
 
   console.log(repo_name, image_tag);
 
   exec(
-    `sh docker-startup-script.sh ${repo_name} ${image_tag}`,
+    `sh docker-startup-script.sh ${repo_name} ${image_tag} ${image_name}`,
     (error, stdout, stderr) => {
       console.log(`${stdout}`);
       console.log(`${stderr}`);

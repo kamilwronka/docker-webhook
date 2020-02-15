@@ -5,4 +5,4 @@ IMAGE_NAME=$3;
 sudo docker pull $REPO_NAME:$IMAGE_TAG
 sudo docker stop $IMAGE_NAME
 sudo docker rm $IMAGE_NAME
-sudo docker run --network host --name $IMAGE_NAME -d -p 80:80 $REPO_NAME
+sudo docker run --name $IMAGE_NAME -d -p 80:80 $REPO_NAME

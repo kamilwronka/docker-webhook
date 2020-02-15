@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const exec = require("child_process").exec;
 
-const port = 3000;
+const port = 7777;
 
 app.use(bodyParser.json());
 

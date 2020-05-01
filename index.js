@@ -3,23 +3,71 @@ const app = express();
 const bodyParser = require("body-parser");
 const exec = require("child_process").exec;
 
-const port = 7777;
+const port = process.env.DOCKER_WEBHOOK_PORT;
 
 app.use(bodyParser.json());
 
-app.get("/", function(req, res) {
-  res.send("Hello World");
-});
-
-app.post("/api/hook/docker", (req, res) => {
+app.post("/csgoed-cms", (req, res) => {
   const repo_name = req.body.repository.repo_name;
   const image_tag = req.body.push_data.tag;
   const image_name = req.body.repository.name;
 
-  console.log(repo_name, image_tag);
+  exec(
+    `sh run-cms.sh ${repo_name} ${image_tag} ${image_name}`,
+    (error, stdout, stderr) => {
+      console.log(`${stdout}`);
+      console.log(`${stderr}`);
+      if (error !== null) {
+        console.log(`exec error: ${error}`);
+      }
+      res.end(stdout);
+    }
+  );
+});
+
+app.post("/csgoed-mainpage", (req, res) => {
+  const repo_name = req.body.repository.repo_name;
+  const image_tag = req.body.push_data.tag;
+  const image_name = req.body.repository.name;
 
   exec(
-    `sh docker-startup-script.sh ${repo_name} ${image_tag} ${image_name}`,
+    `sh run-mainpage.sh ${repo_name} ${image_tag} ${image_name}`,
+    (error, stdout, stderr) => {
+      console.log(`${stdout}`);
+      console.log(`${stderr}`);
+      if (error !== null) {
+        console.log(`exec error: ${error}`);
+      }
+      res.end(stdout);
+    }
+  );
+});
+
+app.post("/csgoed-panel", (req, res) => {
+  const repo_name = req.body.repository.repo_name;
+  const image_tag = req.body.push_data.tag;
+  const image_name = req.body.repository.name;
+
+  exec(
+    `sh run-panel.sh ${repo_name} ${image_tag} ${image_name}`,
+    (error, stdout, stderr) => {
+      console.log(`${stdout}`);
+      console.log(`${stderr}`);
+      if (error !== null) {
+        console.log(`exec error: ${error}`);
+      }
+      res.end(stdout);
+    }
+  );
+});
+
+app.post("/csgoed-panel-backend", (req, res) => {
+  const repo_name = req.body.repository.repo_name;
+  const image_tag = req.body.push_data.tag;
+  const image_name = req.body.repository.name;
+
+  exec(
+    `sh run-panel-backend.sh ${repo_name} ${image_tag} ${image_name}`,
     (error, stdout, stderr) => {
       console.log(`${stdout}`);
       console.log(`${stderr}`);

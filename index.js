@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const exec = require("child_process").exec;
 
-const port = process.env.DOCKER_WEBHOOK_PORT;
+const port = process.env.DOCKER_WEBHOOK_PORT || 3000;
 
 app.use(bodyParser.json());
 
